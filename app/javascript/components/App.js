@@ -21,11 +21,13 @@ class App extends React.Component {
                         <tr>
                             {this.props.posts.map((post) => {
                                 return (
-                                    <td>
-                                        {post.content}
-                                    </td>
-                                )
-                            })}
+                                        <td>
+                                            {post.content}
+                                        </td>
+                                    )
+                                })}
+                                <td>編集</td>
+                                <td>削除</td>
                         </tr>
                     
                        
