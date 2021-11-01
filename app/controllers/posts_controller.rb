@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+    protect_from_forgery :except => [:destroy, :create]
+
     def new
         @post = Post.new
     end
@@ -27,7 +29,8 @@ class PostsController < ApplicationController
     def update
         post_update = Post.find(params[:id])
         if post_update.update(post_params)
-            redirect_to root_path
+            render json: post_update
+            # redirect_to root_path
         else
             redirect_to root_path
         end
@@ -36,7 +39,7 @@ class PostsController < ApplicationController
     def destroy
         post = Post.find(params[:id])
         if post.delete
-            redirect_to root_path
+            render json: post
         else
             redirect_to root_path
         end
@@ -45,6 +48,6 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:content)
+        params.require(:post).permit(:content, :check)
     end
 end
