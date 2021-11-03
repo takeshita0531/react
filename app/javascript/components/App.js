@@ -27,7 +27,22 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            todos: []
+            
+            
+            todos: [
+                
+                {
+                    // id: post.id,
+                    content: "ssss"
+                    // check: post.check
+                },
+                {
+                    // id: post.id,
+                    content: "ssss"
+                    // check: post.check
+                }
+
+            ]
             // id: this.props.id,
             // content: this.props.content,
             // check: this.props.check
@@ -36,18 +51,24 @@ class App extends React.Component {
     render() {
         let todos = this.state.todos
         let currentId = 0
+        // const { todos } = this.state
+        const { posts } = this.props
 
-        const handleSubmit = (content) => {
-            const newTodo = {
-                id: currentId,
-                content,
-                check: false
-            }
-            // axios.post('/posts', newTodo)
-            const newTodos = [...this.state.todos, newTodo]
-            this.setState({ todos: newTodos});
-            currentId++;
-        }
+        // handleSubmit() {
+        //     this.setState({ todos: newTodos});
+        //     currentId++;
+        // }
+        // const handleSubmit = content => {
+        //     const newTodo = {
+        //         id: posts.id,
+        //         content,
+        //         check: posts.check
+        //     }
+        //     // axios.post('/posts', newTodo)
+        //     const newTodos = [...this.state.todos, newTodo]
+        //     this.setState({ todos: newTodos});
+        //     currentId++;
+        // }
 
         const removePost = (postId) => {
             const sure = window.confirm('削除しますか？')
@@ -128,17 +149,18 @@ class App extends React.Component {
                                 </tr>
                             )
                         })} */}
-                        <New onSubmit={() => handleSubmit()}/>
+                        <New onSubmit={this.handleSubmit}/>
                         App
                         <table className="task">
                             <thead  data-type="ok">
                             <tr><th>内容</th><th></th><th></th></tr>
                             </thead>
                             <tbody>
-                            {this.props.posts.map((post) => {
+                            {/* {this.props.posts.map((post) => { */}
+                            {this.state.todos.map((post, key) => {
                                 return (
                                     <tr>
-                                        <td key={post.id}>
+                                        <td key={key}>
                                         {post.check ? (
                                             <CheckedBox>
                                                 <ImCheckboxChecked id={post.id} onClick={() => unupdatePost(post) } />
@@ -159,6 +181,17 @@ class App extends React.Component {
                 </table>                
             </div>
         )
+    }
+    handleSubmit = content => {
+        const newTodo = {
+            // id: posts.id,
+            content,
+            // check: posts.check
+        }
+        // axios.post('/posts', newTodo)
+        const newTodos = [...this.state.todos, newTodo]
+        this.setState({ todos: newTodos});
+        // currentId++;
     }
 }
 // <Index 
