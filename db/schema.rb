@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2021_10_29_041506) do
 
   create_table "posts", charset: "utf8mb4", force: :cascade do |t|
     t.text "content"
-    t.boolean "check"
+    t.boolean "check", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

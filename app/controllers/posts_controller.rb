@@ -1,12 +1,17 @@
 class PostsController < ApplicationController
-    protect_from_forgery :except => [:destroy, :create]
+    protect_from_forgery :except => [:destroy, :create, :update]
 
     def new
         @post = Post.new
     end
-
+    
     def index
-        @post_all = Post.all();
+        posts = Post.all
+        respond_to do |format|      
+            format.html
+            format.json {render :json => posts}
+        end    
+        # render json: posts
     end
 
     def show
@@ -20,7 +25,10 @@ class PostsController < ApplicationController
     def create
         post_create = Post.create(post_params)
         if post_create.save
-            redirect_to root_path
+            respond_to do |format|      
+                format.html
+                format.json {render :json => post_create}
+            end    
         else
             redirect_to posts_path
         end
@@ -29,7 +37,10 @@ class PostsController < ApplicationController
     def update
         post_update = Post.find(params[:id])
         if post_update.update(post_params)
-            render json: post_update
+            respond_to do |format|      
+                format.html
+                format.json {render :json => post_update}
+            end    
             # redirect_to root_path
         else
             redirect_to root_path

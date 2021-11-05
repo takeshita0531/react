@@ -1,22 +1,110 @@
-// import React from 'react'
-// import axios from 'axios'
-// import styled from 'styled-components'
-// import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import styled from 'styled-components'
+import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
 
-// const CheckedBox = styled.div`
-//   display: flex;
-//   align-items: center;
-//   margin: 0 7px;
-//   color: green;
-//   cursor: pointer;
-// `
+const CheckedBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 7px;
+  color: green;
+  cursor: pointer;
+`
 
-// const UncheckedBox = styled.div`
-//   display: flex;
-//   align-items: center;
-//   margin: 0 7px;
-//   cursor: pointer;
-// `
+const UncheckedBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 7px;
+  cursor: pointer;
+`
+
+function Index() {
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        axios.get('/posts.json')
+        .then(resp => {
+          setPosts(resp.data);
+        })
+        }, [])
+
+        const updatePost = (post, key) => {
+            var data = {
+                // id: post.id,
+                content: post.content,
+                check: !post.check
+            }
+            
+            axios.patch(`/posts/${post.id}`, data)
+            .then(resp => {
+                const newPosts = [...posts]
+                newPosts[key].check = resp.data.check
+                setPosts(newPosts)
+            })
+            // this.setState({
+            //     id: data.id,
+            //     content: data.content,
+            //     check: data.check
+            // })
+            // .then(resp => {
+            //     console.log(resp.post.id)
+            //     })
+        }
+
+        // const unupdatePost = (post) => {
+        //     var data = {
+        //         id: post.id,
+        //         content: post.content,
+        //         check: false
+        //     }
+            
+        //     axios.patch('/posts/' + post.id, data)
+        //     .then(resp => {
+        //         const newPosts = [...posts]
+        //         newPosts[key].check = resp.data.check
+        //         setPosts(newPosts)
+        //     })
+        //     // const newTodos = [...this.state.check, data]
+        //     // this.setState({ data: newTodos});
+
+        // }
+            
+
+      return(
+        <div>
+            <table className="task">
+                <thead  data-type="ok">
+                <tr><th></th><th>内容</th><th></th><th></th></tr>
+                </thead>
+                <tbody>
+                {posts.map((post, key) => {
+                    return(
+                        <tr>
+                            <td key={key}>
+                                {post.check ? (
+                                    <CheckedBox>
+                                        <ImCheckboxChecked onClick={() => updatePost(post, key) } />
+                                    </CheckedBox>
+                                ) : (
+                                    <UncheckedBox>
+                                        <ImCheckboxUnchecked onClick={() => updatePost(post, key) } />
+                                    </UncheckedBox>
+                                )}
+                            </td>
+                            <td>
+                                {post.content}
+                            </td>
+                            <td>編集</td>
+                            {/* <td><a href="" onClick={(e) => removePost(post.id, e)}>削除</a></td> */}
+                        </tr>
+                    )
+                })}
+                </tbody>
+            </table>
+        </div>
+      )
+
+}
 
 // class Index extends React.Component {
 //     constructor(props) {
@@ -146,4 +234,4 @@
 //     }
 // }
 
-// export default Index;
+export default Index;
