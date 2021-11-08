@@ -1,6 +1,3 @@
-// import React, { useState } from 'react'
-// import axios from 'axios'
-
 import React, { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
@@ -41,19 +38,15 @@ const Icon = styled.span`
 function New(props) {
     const postState = {
         id: null,
-        content: "aaa",
+        content: "",
         check: false
     }
 
     const [post, setPost] = useState(postState)
 
-    // const handleChange = e => {
-    //     setPost({content: e.currentTarget.value});
-
-    // };
-
     const handlePost = event => {
         const { content, value } = event.target;
+        // console.log(content)
         setPost({ ...post, [content]: value })
     }
     const savePost = () => {
@@ -64,13 +57,11 @@ function New(props) {
         axios.post('/posts', data)
         .then(resp => {
             setPost({
-                // id: resp.data.id,
-                content: resp.data.content,
-                check: resp.data.check
+                content: resp.data.content
+                // check: resp.data.check
             })
         })
-        // notify()
-        props.history.push('/posts');
+        // props.history.push('/posts');
     }
     return(
        <>
@@ -78,9 +69,9 @@ function New(props) {
         <InputAndButton>
           <InputContent
             type="text"
-            // required
-            value={post.content}
-            // content="content"
+            required
+            value={post.name}
+            name="content"
             onChange={handlePost}
           />
           <Button
@@ -92,16 +83,6 @@ function New(props) {
           </Button>
         </InputAndButton>
       </>
-        // <div>
-        //     <form>
-        //         <input type="text"
-        //             required
-        //             value={post.content}
-        //             content="content"
-        //             onChange={handlePost}/>
-        //          <button onClick={savePost}>追加</button>
-        //     </form>
-        // </div>
     )
 
 

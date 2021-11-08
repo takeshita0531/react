@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
+import { Link} from 'react-router-dom';
+
 
 const CheckedBox = styled.div`
   display: flex;
@@ -26,29 +28,31 @@ function Index() {
         .then(resp => {
           setPosts(resp.data);
         })
-        }, [])
+    }, [])
 
-        const updatePost = (post, key) => {
-            var data = {
-                // id: post.id,
-                content: post.content,
-                check: !post.check
-            }
+    const updatePost = (post, key) => {
+        var data = {
+            // id: post.id,
+            content: post.content,
+            check: !post.check
+        }
             
-            axios.patch(`/posts/${post.id}`, data)
+        axios.patch(`/posts/${post.id}`, data)
             .then(resp => {
                 const newPosts = [...posts]
                 newPosts[key].check = resp.data.check
                 setPosts(newPosts)
             })
-            // this.setState({
-            //     id: data.id,
-            //     content: data.content,
-            //     check: data.check
-            // })
-            // .then(resp => {
-            //     console.log(resp.post.id)
-            //     })
+    }
+
+        const removePost = (postId) => {
+            const sure = window.confirm('削除しますか？')
+            if (sure) {
+                axios.delete('/posts/' + postId)
+                .then(resp => {
+                    console.log(resp.postId)
+                })
+            }
         }
 
         // const unupdatePost = (post) => {
@@ -72,6 +76,12 @@ function Index() {
 
       return(
         <div>
+            {/* <Link to="/posts/new">
+                Post
+            </Link>
+            <Link to="/posts">
+                Posts
+            </Link> */}
             <table className="task">
                 <thead  data-type="ok">
                 <tr><th></th><th>内容</th><th></th><th></th></tr>
@@ -94,8 +104,12 @@ function Index() {
                             <td>
                                 {post.content}
                             </td>
-                            <td>編集</td>
-                            {/* <td><a href="" onClick={(e) => removePost(post.id, e)}>削除</a></td> */}
+                            <td>
+                                <Link to={"/posts/" + post.id + "/edit"}>
+                                    編集
+                                </Link>
+                            </td>
+                            <td><a href="" onClick={(e) => removePost(post.id, e)}>削除</a></td>
                         </tr>
                     )
                 })}
