@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-# root to: "posts#index"
+root to: redirect('/posts')
 
 resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
 
