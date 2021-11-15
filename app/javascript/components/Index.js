@@ -23,6 +23,7 @@ const UncheckedBox = styled.div`
 function Index() {
     let navigate = useNavigate();
     const [posts, setPosts] = useState([]);
+    const [searchContent, setSearchContent] = useState('')
 
     useEffect(() => {
         axios.get('/posts.json')
@@ -56,12 +57,19 @@ function Index() {
 
     return(
         <div>
+            <input type="text" placeholder="投稿検索" onChange={event => {setSearchContent(event.target.value)}}/>
             <table className="task">
                 <thead  data-type="ok">
                 <tr><th></th><th>内容</th><th></th><th></th></tr>
                 </thead>
                 <tbody>
-                {posts.map((post, key) => {
+                {posts.filter((post) => {
+                    if(searchContent === "") {
+                        return post
+                    }else if (post.content.includes(searchContent)) {
+                        return post
+                    }
+                }).map((post, key) => {
                     return(
                         <tr>
                             <td key={key}>
@@ -87,6 +95,7 @@ function Index() {
                         </tr>
                     );
                 })}
+                
                 </tbody>
             </table>
         </div>
