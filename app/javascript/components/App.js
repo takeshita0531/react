@@ -3,11 +3,49 @@ import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Index from './Index';
 import New from './New';
 import Edit from './Edit';
+import Search from './Search'
 
-function App() {
-    return(
-        <>
-            <BrowserRouter>
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            filter: "index"
+
+        }
+    }
+    handleChange(event) {
+        this.setState({filter: event})
+    }
+    
+    render() {
+        let getFilter;
+        if (this.state.filter === "index") {
+            getFilter = <Index />
+        } else if (this.state.filter === "new") {
+            getFilter = <New />
+        } else {
+            getFilter = <Search />
+        }
+        
+        return(
+            <div className="app">
+                <select value={this.state.filter} onChange={e => this.handleChange(e.target.value)}>
+                    <option value="index">投稿一覧</option>
+                    <option value="new">新規投稿</option>
+                    <option value="search">投稿検索</option>
+                </select>
+                {getFilter}
+            </div>
+            
+        )
+        
+    }
+}
+
+// function App() {
+//     return(
+//         <>
+            {/* <BrowserRouter>
                 <Link className="post" to="/posts/new">
                     新規投稿
                 </Link>
@@ -19,9 +57,9 @@ function App() {
                     <Route exact path="/posts/new" element={<New />} />
                     <Route exact path="/posts/:id/edit" element={<Edit />} />
                 </Routes>
-            </BrowserRouter> 
-        </>
-    );
-};
+            </BrowserRouter>  */}
+//         </>
+//     );
+// };
 
 export default App;

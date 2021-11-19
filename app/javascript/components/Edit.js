@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+// import { useParams, useNavigate } from 'react-router-dom';
 
 function Edit() {
     const initialTodoState = {
@@ -8,9 +8,9 @@ function Edit() {
         content: "",
         check: false
       }
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
     const [currentPost, setCurrentPost] = useState(initialTodoState);
-    const { id } = useParams();
+    // const { id } = useParams();
 
     useEffect(() => {
         axios.get(`/posts/${id}.json`)
@@ -31,7 +31,7 @@ function Edit() {
         event.preventDefault();
         axios.patch(`/posts/${id}`, data)
         .then(resp => {
-            navigate("/posts")
+            // navigate("/posts")
         });
     };
     
@@ -43,8 +43,8 @@ function Edit() {
         axios.patch(`/posts/${id}`, data)
         .then(resp => {
             setCurrentPost(resp.data)
-        })
-    }
+        });
+    };
     return(
         <>
             <h1>編集</h1>

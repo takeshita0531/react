@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function New() {
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
     const [content, setPost] = useState("");
     
     const savePost = event => {
@@ -17,7 +17,7 @@ function New() {
                 content: resp.data.content
                 // check: resp.data.check
             });
-            navigate("/posts")
+            // navigate("/posts")
         });
     };
 
