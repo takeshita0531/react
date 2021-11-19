@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+React起動までの流れ
 
-Things you may want to cover:
+* git cloneでリポジトリをクローンする。
 
-* Ruby version
+* docker-compose buildでdockerをbuildする。
 
-* System dependencies
+* docker-compose run web rails db:createでデータベースを作成する。
 
-* Configuration
+* docker-compose run web rails webpacker:installでwebpackerのインストールを行う。
 
-* Database creation
+* docker-compose run web rails webpacker:install:reactでreactのインストールを行う。
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* docker-compose upでサーバーを起動する。
