@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function New() {
     // let navigate = useNavigate();
@@ -10,13 +10,17 @@ function New() {
         var data = {
             content: content
         };
+        //  var dataa = {
+        //     content: ""
+        // };
         event.preventDefault();
         axios.post('/posts', data)
         .then(resp => {
-            setPost({
-                content: resp.data.content
-                // check: resp.data.check
-            });
+            setPost(resp.data)
+            // setPost({
+            //     content: dataa
+            //     // check: resp.data.check
+            // });
             // navigate("/posts")
         });
     };

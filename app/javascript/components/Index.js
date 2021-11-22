@@ -35,7 +35,8 @@ function Index() {
     const updatePost = (post, key) => {
         var data = {
             content: post.content,
-            check: !post.check
+            check: !post.check,
+            editing: false
         };
         axios.patch(`/posts/${post.id}.json`, data)
             .then(resp => {
@@ -54,6 +55,13 @@ function Index() {
             });
         };
     };
+
+    const clickEdit = () => {
+        var data = {
+            editing: true
+        }
+        setPosts(data)
+    }
 
     return(
         <div>
@@ -80,7 +88,18 @@ function Index() {
                             <td>
                                 {post.content}
                             </td>
-                            {/* <td>
+                            
+                            <td>
+                            {post.editing ? (
+                                <Edit />
+                            ):(
+                                <Index />
+                            )
+                            }
+                            {/* post.editing ? */}
+                                {/* {post.editing ? } */}
+                            </td>
+                            {/* <td onClick={clickEdit}>
                                 <Link to={"/posts/" + post.id + "/edit"}>
                                     編集
                                 </Link>
