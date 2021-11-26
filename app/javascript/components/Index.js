@@ -56,12 +56,12 @@ function Index() {
         };
     };
 
-    const clickEdit = () => {
-        var data = {
-            editing: true
-        }
-        setPosts(data)
-    }
+    // const clickEdit = () => {
+    //     var data = {
+    //         editing: true
+    //     }
+    //     setPosts(data)
+    // }
 
     return(
         <div>
@@ -90,12 +90,12 @@ function Index() {
                             </td>
                             
                             <td>
-                            {post.editing ? (
+                            {/* {post.editing ? (
                                 <Edit />
                             ):(
                                 <Index />
                             )
-                            }
+                            } */}
                             {/* post.editing ? */}
                                 {/* {post.editing ? } */}
                             </td>

@@ -4,17 +4,35 @@ import Index from './Index';
 import New from './New';
 import Edit from './Edit';
 import Search from './Search'
+import axios from 'axios';
 
 class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             filter: "index"
-
         }
     }
+
+    
+    componentDidMount() {
+        axios.get('/modes.json')
+        .then(resp => {
+            var mode = resp.data.map((filter) => filter.filter)
+            this.setState({filter: mode[0]});
+        });
+    }
+    
     handleChange(event) {
+        var data = {
+            filter: event
+        }
         this.setState({filter: event})
+        axios.post('/modes', data)
+        .then(resp => {
+            this.setState({filter: event});
+        });
+
     }
     
     render() {
@@ -26,7 +44,7 @@ class App extends React.Component {
         } else {
             getFilter = <Search />
         }
-        
+    
         return(
             <div className="app">
                 <select value={this.state.filter} onChange={e => this.handleChange(e.target.value)}>
@@ -37,10 +55,10 @@ class App extends React.Component {
                 {getFilter}
             </div>
             
-        )
-        
+            )
+            
+        }
     }
-}
 
 // function App() {
 //     return(
