@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Edit from './Edit';
 import axios from 'axios';
 import styled from 'styled-components';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
@@ -87,6 +88,7 @@ function Index() {
                             </td>
                             <td>
                                 {post.content}
+                                {/* {console.log(key)} */}
                             </td>
                             
                             <td>
@@ -99,11 +101,19 @@ function Index() {
                             {/* post.editing ? */}
                                 {/* {post.editing ? } */}
                             </td>
-                            {/* <td onClick={clickEdit}>
-                                <Link to={"/posts/" + post.id + "/edit"}>
+                            <td>
+                            <button>
+                            <Edit
+                                id={key}
+                                content={post.content}
+                            />
+                                編集
+                            </button>
+                                {/* <Edit id={key}/> */}
+                                {/* <Link to={"/posts/" + post.id + "/edit"}>
                                     編集
-                                </Link>
-                            </td> */}
+                                </Link> */}
+                            </td> 
                             <td><a href="" onClick={(e) => removePost(post.id, e)}>削除</a></td>
                         </tr>
                     );

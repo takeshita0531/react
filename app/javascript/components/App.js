@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+// import { BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Index from './Index';
 import New from './New';
 import Edit from './Edit';
@@ -53,6 +53,7 @@ class App extends React.Component {
                     <option value="search">投稿検索</option>
                 </select>
                 {getFilter}
+                <Edit />
             </div>
             
             )
