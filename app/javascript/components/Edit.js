@@ -58,46 +58,6 @@ class Edit extends React.Component {
                                     {errors.content}
                                   </FormFeedback>
                                 </FormGroup>
-                                {/* <FormGroup>
-                                  <legend className="col-form-label">犬を飼っていますか？</legend>
-                                  <FormGroup inline check>
-                                    <Label check>
-                                      飼っている：
-                                      <Input
-                                        type="radio"
-                                        name="pet"
-                                        value="havePet"
-                                        onChange={handleChange}
-                                      />
-                                    </Label>
-                                  </FormGroup>
-                                  <FormGroup inline check>
-                                    <Label check>
-                                      飼っていない：
-                                      <Input
-                                        type="radio"
-                                        name="pet"
-                                        value="noPet"
-                                        onChange={handleChange}
-                                      />
-                                    </Label>
-                                  </FormGroup>
-                                  <span className="text-danger small">{touched.pet && errors.pet ? errors.pet : null}</span>
-                                </FormGroup>
-                                <FormGroup>
-                                  <Label>ペットの名前</Label>
-                                  <Input
-                                    type="text"
-                                    name="petName"
-                                    value={values.petName}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    invalid={Boolean(errors.petName && touched.petName)}
-                                  />
-                                  <FormFeedback>
-                                    {errors.petName}
-                                  </FormFeedback>
-                                </FormGroup> */}
                                 <FormGroup></FormGroup>
                                 <Button onClick={handleSubmit}>申し込む</Button>
                               </Form>

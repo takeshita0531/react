@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
 // import { Link, useNavigate } from 'react-router-dom';
+import './Index.css';
 
 
 const CheckedBox = styled.div`
@@ -91,7 +92,15 @@ function Search() {
                                     編集
                                 </Link>
                             </td> */}
-                            <td><a href="" onClick={(e) => removePost(post.id, e)}>削除</a></td>
+                            <td>
+                                <button className="bg-red-700 font-semibold text-white py-2 px-4 rounded">
+                                    <a href="" onClick={(e) => removePost(post.id, e)}>削除</a>
+                                </button>
+                                {/* <a href="" onClick={(e) => removePost(post.id, e)}>削除</a> */}
+                                <button className="bg-red-700 font-semibold text-white py-2 px-4 rounded">
+                                    aaaa
+                                </button>
+                            </td>
                         </tr>
                     );
                 })}

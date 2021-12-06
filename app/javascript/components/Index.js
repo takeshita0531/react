@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
 // import { Link, useNavigate } from 'react-router-dom';
+import './Index.css';
 
 
 const CheckedBox = styled.div`
@@ -69,7 +70,7 @@ function Index() {
             {/* <input type="text" placeholder="投稿検索" onChange={event => {setSearchContent(event.target.value)}}/> */}
             <table className="task">
                 <thead  data-type="ok">
-                <tr><th></th><th>内容</th><th></th><th></th></tr>
+                <tr><th></th><th>内容</th><th>期日</th><th></th><th></th></tr>
                 </thead>
                 <tbody>
                 {posts.map((post, key) => {
@@ -92,6 +93,7 @@ function Index() {
                             </td>
                             
                             <td>
+                            {post.duedate}
                             {/* {post.editing ? (
                                 <Edit />
                             ):(
@@ -103,10 +105,10 @@ function Index() {
                             </td>
                             <td>
                             <button>
-                            <Edit
+                            {/* <Edit
                                 id={key}
                                 content={post.content}
-                            />
+                            /> */}
                                 編集
                             </button>
                                 {/* <Edit id={key}/> */}
@@ -114,13 +116,20 @@ function Index() {
                                     編集
                                 </Link> */}
                             </td> 
-                            <td><a href="" onClick={(e) => removePost(post.id, e)}>削除</a></td>
+                            <td>
+                                <button className="bg-red-700 font-semibold text-white py-2 px-4 rounded">
+                                    <a href="" onClick={(e) => removePost(post.id, e)}>削除</a>
+                                </button>
+                            </td>
+                            {/* <button className="bg-indigo-700 font-semibold text-white py-2 px-4 rounded">aaaa</button> */}
                         </tr>
+                        
                     );
                 })}
                 
                 </tbody>
             </table>
+            <p className="font-black">fontの太さ</p>
         </div>
     );
 };
