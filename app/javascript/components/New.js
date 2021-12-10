@@ -93,14 +93,22 @@ function New() {
     return(
         <div>
             <form>
-                <input
-                    type="text"
-                    name="content"
-                    value={content}
-                    onChange={e => setPost(e.target.value)}
-                />
+                <label className="block">
+                    <span className="text-gray-700">新規投稿</span>
+                    <input
+                        className="w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
+                        type="text"
+                        name="content"
+                        value={content}
+                        onChange={e => setPost(e.target.value)}
+                    />
+                </label>
+                <label className="block">
+                    <span className="text-gray-700">期日設定</span>
+                    
                 <React.Fragment>
                     <DatePicker
+                        className="w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
                         locale='ja'
                         selected={dueDate}
                         onChange={handleChange}
@@ -151,7 +159,8 @@ function New() {
                         }
                     />
                 </React.Fragment>
-                <button onClick={savePost}>追加</button>
+                </label>
+                <button className="bg-green-700 font-semibold text-white py-2 px-4 rounded" onClick={savePost}>追加</button>
             </form>
         </div>
     );

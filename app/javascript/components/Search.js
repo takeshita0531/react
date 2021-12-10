@@ -57,56 +57,73 @@ function Search() {
     };
 
     return(
-        <div>
+        <div className="w-full mb-12 px-4 flex justify-center">
             <input type="text" placeholder="投稿検索" onChange={event => {setSearchContent(event.target.value)}}/>
-            <table className="task">
-                <thead  data-type="ok">
-                <tr><th></th><th>内容</th><th></th><th></th></tr>
-                </thead>
-                <tbody>
-                {posts.filter((post) => {
-                    if(searchContent === "") {
-                        return post
-                    }else if (post.content.includes(searchContent)) {
-                        return post
-                    }
-                }).map((post, key) => {
-                    return(
-                        <tr>
-                            <td key={key}>
-                                {post.check ? (
-                                    <CheckedBox>
-                                        <ImCheckboxChecked onClick={() => updatePost(post, key) } />
-                                    </CheckedBox>
-                                ) : (
-                                    <UncheckedBox>
-                                        <ImCheckboxUnchecked onClick={() => updatePost(post, key) } />
-                                    </UncheckedBox>
-                                )}
-                            </td>
-                            <td>
-                                {post.content}
-                            </td>
-                            {/* <td>
-                                <Link to={"/posts/" + post.id + "/edit"}>
+            <div className="relative flex flex-col min-w-0 break-words w-6/12 mb-6 shadow-lg rounded bg-pink-900 text-white">
+                <table className="items-center bg-transparent border-collapse">
+                    <thead  data-type="ok">
+                    <tr>
+                        <th className="px-6 align-middle border border-solid py-3 text-m uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-pink-800 text-pink-300 border-pink-700"></th>
+                        <th className="px-6 align-middle border border-solid py-3 text-m uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-pink-800 text-pink-300 border-pink-700">内容</th>
+                        <th className="px-6 align-middle border border-solid py-3 text-m uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-pink-800 text-pink-300 border-pink-700">期日</th>
+                        <th className="px-6 align-middle border border-solid py-3 text-m uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-pink-800 text-pink-300 border-pink-700"></th>
+                        <th className="px-6 align-middle border border-solid py-3 text-m uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-pink-800 text-pink-300 border-pink-700"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {posts.filter((post) => {
+                        if(searchContent === "") {
+                            return post
+                        }else if (post.content.includes(searchContent)) {
+                            return post
+                        }
+                    }).map((post, key) => {
+                        return(
+                            <tr>
+                                <td className="w-3 border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4" key={key}>
+                                    {post.check ? (
+                                        <CheckedBox>
+                                            <ImCheckboxChecked onClick={() => updatePost(post, key) } />
+                                        </CheckedBox>
+                                    ) : (
+                                        <UncheckedBox>
+                                            <ImCheckboxUnchecked onClick={() => updatePost(post, key) } />
+                                        </UncheckedBox>
+                                    )}
+                                </td>
+                                <td className="w-3 border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
+                                    {post.content}
+                                </td>
+                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
+                                <button className="bg-blue-700 font-semibold text-white py-2 px-4 rounded">
+                                {/* <Edit
+                                    id={key}
+                                    content={post.content}
+                                /> */}
                                     編集
-                                </Link>
-                            </td> */}
-                            <td>
-                                <button className="bg-red-700 font-semibold text-white py-2 px-4 rounded">
-                                    <a href="" onClick={(e) => removePost(post.id, e)}>削除</a>
                                 </button>
-                                {/* <a href="" onClick={(e) => removePost(post.id, e)}>削除</a> */}
-                                <button className="bg-red-700 font-semibold text-white py-2 px-4 rounded">
-                                    aaaa
-                                </button>
-                            </td>
-                        </tr>
-                    );
-                })}
-                
-                </tbody>
-            </table>
+                                    {/* <Edit id={key}/> */}
+                                    {/* <Link to={"/posts/" + post.id + "/edit"}>
+                                        編集
+                                    </Link> */}
+                                </td> 
+                                {/* <td>
+                                    <Link to={"/posts/" + post.id + "/edit"}>
+                                        編集
+                                    </Link>
+                                </td> */}
+                                <td className="w-3 border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
+                                    <button className="bg-red-700 font-semibold text-white py-2 px-4 rounded">
+                                        <a href="" onClick={(e) => removePost(post.id, e)}>削除</a>
+                                    </button>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                    
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

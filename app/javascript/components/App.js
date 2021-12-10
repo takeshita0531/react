@@ -5,6 +5,7 @@ import New from './New';
 import Edit from './Edit';
 import Search from './Search'
 import axios from 'axios';
+import './Index.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -46,14 +47,17 @@ class App extends React.Component {
         }
     
         return(
-            <div className="app">
-                <select value={this.state.filter} onChange={e => this.handleChange(e.target.value)}>
-                    <option value="index">投稿一覧</option>
-                    <option value="new">新規投稿</option>
-                    <option value="search">投稿検索</option>
-                </select>
-                {getFilter}
-                <Edit />
+            
+            <div>
+                <div className="w-5/12 flex justify-center">
+                    <select value={this.state.filter} onChange={e => this.handleChange(e.target.value)}>
+                        <option value="index">投稿一覧</option>
+                        <option value="new">新規投稿</option>
+                        <option value="search">投稿検索</option>
+                    </select>
+                </div>
+                    {getFilter}
+                    <Edit />
             </div>
             
             )
