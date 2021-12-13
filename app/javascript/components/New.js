@@ -91,7 +91,7 @@ function New() {
     const months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
     return(
-        <div>
+        <div className="flex justify-center">
             <form>
                 <label className="block">
                     <span className="text-gray-700">新規投稿</span>
@@ -99,6 +99,7 @@ function New() {
                         className="w-full py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
                         type="text"
                         name="content"
+                        placeholder="投稿を入力してください"
                         value={content}
                         onChange={e => setPost(e.target.value)}
                     />

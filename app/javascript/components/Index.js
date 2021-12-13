@@ -26,6 +26,14 @@ function Index() {
     // let navigate = useNavigate();
     const [posts, setPosts] = useState([]);
     const [searchContent, setSearchContent] = useState('')
+    const [edit, setEdit] = useState({
+        id: "",
+        editing: false
+    })
+    // this.state = {
+    //     id: "",
+    //     editing: false
+    // }
 
     useEffect(() => {
         axios.get('/posts.json')
@@ -38,7 +46,7 @@ function Index() {
         var data = {
             content: post.content,
             check: !post.check,
-            editing: false
+            // editing: false
         };
         axios.patch(`/posts/${post.id}.json`, data)
             .then(resp => {
@@ -65,6 +73,45 @@ function Index() {
     //     setPosts(data)
     // }
 
+    const handleClickEdit = (post) => {
+        var data = ({
+            id: post.id,
+            editing: true
+        })
+        setEdit(data)
+        // const { onChange, id, editing } = this.props;
+        // onChange(id, "editing", !editing);
+    };
+    let getPost;
+    let getPostId;
+    posts.map((post) => {
+        if (post.id === edit.id) {
+            getPost = post.content
+            getPostId = post.id
+        }
+          
+    })
+
+    //   const postId;
+    // } else if (this.state.filter === "new") {
+    //     getFilter = <New />
+    // } else {
+    //     getFilter = <Search />
+    // }
+      
+    const handleChangeTodoAttribute = (id, key, value) => {
+        var data = ({
+            id: id,
+            editing: false
+        })
+        // getEdit
+        if (id === edit.id) {
+            // getEdit = false
+            setEdit(data)
+        }
+        console.log(id)
+      };
+
     return(
         
         <div className="w-full mb-12 px-4 flex justify-center">
@@ -75,6 +122,22 @@ function Index() {
                     </div>
                 </div>
             </div> */}
+            {edit.editing? (
+
+                <div>
+                    {/* {posts.map((post, key) => { */}
+                        {/* return( */}
+                            <Edit 
+                                // postId={post.id}
+                                id={getPostId}
+                                content={getPost}
+                                onCancel={handleChangeTodoAttribute}
+                            />
+                            
+                            {/* );
+                    })} */}
+                </div>
+            ):(
             <div className="relative flex flex-col min-w-0 break-words w-6/12 mb-6 shadow-lg rounded bg-pink-900 text-white">
                 <table className="items-center bg-transparent border-collapse">
                     <thead  data-type="ok">
@@ -103,32 +166,16 @@ function Index() {
                                 </td>
                                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
                                     {post.content}
-                                    {/* {console.log(key)} */}
                                 </td>
                                 
                                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
-                                {post.duedate}
-                                {/* {post.editing ? (
-                                    <Edit />
-                                ):(
-                                    <Index />
-                                )
-                                } */}
-                                {/* post.editing ? */}
-                                    {/* {post.editing ? } */}
+                                    {post.duedate}
                                 </td>
                                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
-                                <button className="bg-blue-700 font-semibold text-white py-2 px-4 rounded">
-                                {/* <Edit
-                                    id={key}
-                                    content={post.content}
-                                /> */}
+                                <button onClick={() => handleClickEdit(post)} className="bg-blue-700 font-semibold text-white py-2 px-4 rounded">
                                     編集
                                 </button>
-                                    {/* <Edit id={key}/> */}
-                                    {/* <Link to={"/posts/" + post.id + "/edit"}>
-                                        編集
-                                    </Link> */}
+                                {edit.id}
                                 </td> 
                                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
                                     <button className="bg-red-700 font-semibold text-white py-2 px-4 rounded">
@@ -138,12 +185,13 @@ function Index() {
                                 {/* <button className="bg-indigo-700 font-semibold text-white py-2 px-4 rounded">aaaa</button> */}
                             </tr>
                             
-                        );
+                            );
                     })}
                     
                     </tbody>
                 </table>
             </div>
+            )}
         </div>
     );
 };
