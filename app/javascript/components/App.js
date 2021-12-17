@@ -6,6 +6,7 @@ import Edit from './Edit';
 import Search from './Search'
 import axios from 'axios';
 import './Index.css';
+// import '../css/tailwind.css';
 
 class App extends React.Component {
     constructor(props) {
@@ -15,7 +16,6 @@ class App extends React.Component {
         }
     }
 
-    
     componentDidMount() {
         axios.get('/modes.json')
         .then(resp => {
@@ -33,20 +33,7 @@ class App extends React.Component {
         .then(resp => {
             this.setState({filter: event});
         });
-
     }
-
-    // handleSubmit = (text,id) => {
-    //     // ----- editingを追加 -----
-    //     const newTodo = {
-    //       id: id,
-    //       text: text,
-    //       completed: false,
-    //       editing: false
-    //     };
-    //     const newTodos = [...this.state.todos, newTodo];
-    //     this.setState({ todos: newTodos });
-    //   };
     
     render() {
         let getFilter;
@@ -68,10 +55,9 @@ class App extends React.Component {
                         <option value="search">投稿検索</option>
                     </select>
                 </div>
-                    {getFilter}
+                {getFilter}
             </div>
-            
-            )
+        )
             
         }
     }

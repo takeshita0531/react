@@ -16,45 +16,26 @@ ja.options.weekStartsOn = 0;
 registerLocale('ja', ja);
 
 function New() {
-    // let navigate = useNavigate();
     const [content, setPost] = useState("");
-    // const [posts, setPost] = useState({
-    //     content: "",
-    //     duedate: 'initial title',
-    // });
     const [dueDate, setDate] = useState("");
-    // const [targetDate, setTargetDate] = useState(new Date())
-    // const classes = useStyles()
-    // const today = new Date()
 
     const savePost = event => {
         var data = {
             content: content,
             duedate: dueDate
         };
-        console.log(dueDate)
-        //  var dataa = {
-        //     content: ""
-        // };
+        // console.log(dueDate)
         event.preventDefault();
         axios.post('/posts', data)
         .then(resp => {
             setPost(resp.data)
-            // setPost({
-            //     content: dataa
-            //     // check: resp.data.check
-            // });
-            // navigate("/posts")
         });
     };
 
     var handleChange = date => {
         setDate(date);
+        console.log(date)
     };
-
-    // var increaseMonth = () => {
-    //     return e.preventDefault();
-    // }
 
     var eraHandler = yearNow => {
 
@@ -85,8 +66,8 @@ function New() {
         }
     }
     
-    var startYear = 1912; // カレンダーに表示する最初の西暦（大正元年となる1912を指定）
-    var futureListUp = 5; // カレンダーに表示する未来の年数
+    var startYear = 1912;
+    var futureListUp = 5;
     var years = Array.from({ length: getYear(new Date()) - startYear + futureListUp }, (v, k) => k + startYear).reverse();
     const months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
@@ -105,7 +86,7 @@ function New() {
                     />
                 </label>
                 <label className="block">
-                    <span className="text-gray-700">期日設定</span>
+                <span className="text-gray-700">期日設定</span>
                     
                 <React.Fragment>
                     <DatePicker
@@ -134,9 +115,6 @@ function New() {
                                 <div
                                     style={{ margin: 10, display: "flex", justifyContent: "center" }}>
 
-                                    {/* 前月ボタン */}
-                                    {/* <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>{"<"}</button> */}
-
                                     {/* 年の部分 */}
                                     <select value={getYear(date)} onChange={({ target: { value } }) => changeYear(value)} >
                                         {years.map((option) => (
@@ -151,9 +129,6 @@ function New() {
                                             <option key={option} value={option}> {option}月 </option>
                                         ))}
                                     </select>
-
-                                    {/* 次月ボタン */}
-                                    {/* <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>{">"}</button> */}
                                 </div>
                             );
                         }

@@ -5,6 +5,8 @@ import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
 // import { Link, useNavigate } from 'react-router-dom';
 import './Index.css';
 import Edit from './Edit';
+import * as Yup from 'yup';
+
 
 
 const CheckedBox = styled.div`
@@ -23,7 +25,6 @@ const UncheckedBox = styled.div`
 `
 
 function Search() {
-    // let navigate = useNavigate();
     const [posts, setPosts] = useState([]);
     const [searchContent, setSearchContent] = useState('')
     const [edit, setEdit] = useState({
@@ -49,7 +50,6 @@ function Search() {
                 newPosts[key].check = resp.data.check
                 setPosts(newPosts);
             });
-            // navigate("/posts")
     };
 
     const removePost = (postId) => {
@@ -67,13 +67,27 @@ function Search() {
             editing: true
         })
         setEdit(data)
-        // const { onChange, id, editing } = this.props;
-        // onChange(id, "editing", !editing);
     };
+
+    const handleChangeTodoAttribute = (id, key, value) => {
+        var data = ({
+            id: id,
+            editing: false
+        })
+        if (id === edit.id) {
+            setEdit(data)
+        }
+        console.log(id)
+      };
+
     let getPost;
+    let getPostDueDate;
+    let getPostId
     posts.map((post) => {
         if (post.id === edit.id) {
             getPost = post.content
+            getPostId = post.id
+            getPostDueDate = post.duedate
         }
           
     })
@@ -83,7 +97,10 @@ function Search() {
             {edit.editing? (
             <div>
                 <Edit 
+                    id={getPostId}
                     content={getPost}
+                    duedate={getPostDueDate}
+                    onCancel={handleChangeTodoAttribute}
                 />
             </div>
             ):(
@@ -132,19 +149,10 @@ function Search() {
                                             {post.duedate}
                                         </td>
                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
-                                        <button onClick={() => handleClickEdit(post)} className="bg-blue-700 font-semibold text-white py-2 px-4 rounded">
-                                            編集
-                                        </button>
-                                            {/* <Edit id={key}/> */}
-                                            {/* <Link to={"/posts/" + post.id + "/edit"}>
+                                            <button onClick={() => handleClickEdit(post)} className="bg-blue-700 font-semibold text-white py-2 px-4 rounded">
                                                 編集
-                                            </Link> */}
+                                            </button>
                                         </td> 
-                                        {/* <td>
-                                            <Link to={"/posts/" + post.id + "/edit"}>
-                                                編集
-                                            </Link>
-                                        </td> */}
                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-m whitespace-nowrap p-4">
                                             <button className="bg-red-700 font-semibold text-white py-2 px-4 rounded">
                                                 <a href="" onClick={(e) => removePost(post.id, e)}>削除</a>
