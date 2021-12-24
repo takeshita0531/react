@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Form, FormGroup, Label, Input, Button, FormFeedback } from 'reactstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useForm } from "react-hook-form";
 
 // jaのロケールの設定が週頭が月曜始まりになっているので日曜始まりにする
 ja.options.weekStartsOn = 0;
@@ -18,6 +19,7 @@ registerLocale('ja', ja);
 function New() {
     const [content, setPost] = useState("");
     const [dueDate, setDate] = useState("");
+    const { register, handleSubmit, errors } = useForm();
 
     const savePost = event => {
         var data = {

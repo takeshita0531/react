@@ -9,7 +9,11 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 // import '../css/tailwind.css';
 // import '../css/application.css'
+// import '../css/tailwind.css'
 import '../css/tailwind.css'
+
+// require("stylesheets/application.scss")
+import '../css/application.css'
 
 require("stylesheets/application.scss")
 
